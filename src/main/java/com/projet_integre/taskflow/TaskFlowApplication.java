@@ -4,10 +4,14 @@ import com.projet_integre.taskflow.entities.*;
 import com.projet_integre.taskflow.repositories.ProjetRepository;
 import com.projet_integre.taskflow.repositories.TacheRepository;
 import com.projet_integre.taskflow.repositories.UtilisateurRepository;
+import com.projet_integre.taskflow.services.IProjetService;
+import com.projet_integre.taskflow.services.ITacheService;
+import com.projet_integre.taskflow.services.IUtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.origin.SystemEnvironmentOrigin;
 import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
@@ -16,12 +20,15 @@ import java.util.List;
 
 @SpringBootApplication
 public class TaskFlowApplication  {
+
     @Autowired
-    UtilisateurRepository ur;
+    IUtilisateurService us;
+
     @Autowired
-    TacheRepository tr;
+    ITacheService ts;
+
     @Autowired
-    ProjetRepository pr;
+    IProjetService ps;
     public static void main(String[] args) {
         SpringApplication.run(TaskFlowApplication.class, args);
     }
@@ -29,9 +36,33 @@ public class TaskFlowApplication  {
     CommandLineRunner start(){
 
         return args -> {
-            Projet p1= new Projet(null, null, new ArrayList<>(), new Date(),new ArrayList<>() );
+           Utilisateur u1= us.creerUtilisateur("allam","allam@gmail.com");
+           Projet p1= ps.creerProjet("projet1",u1 );
+            Projet p2= ps.creerProjet("projet2",u1 );
+            Projet p3= ps.creerProjet("projet3",u1 );
+           Utilisateur u2= us.creerUtilisateur("aouad","aouad@gmail.com");
+           us.addMemberToProject(u2,p1);
+            us.addMemberToProject(u2,p3);
+           //List<Projet> projets= ps.getProjetByChef(u1);
+          // projets.forEach(x->System.out.println(x.getNom()));
+            Tache t1 =ts.creerTache("tache1",new Date(),u1,p1);
+            Tache t2 =ts.creerTache("tache2",new Date(),u2,p2);
+            Tache t3 =ts.creerTache("tache3",new Date(),u1,p1);
+           List<Tache> taches= ts.getTachesByProjet(p1);
+            System.out.println("********************");
+           taches.forEach(x-> System.out.println(x.getTitre()));
+           List <Utilisateur> users = us.getAll();
+           users.forEach(x-> System.out.println(x.getNom()));
+
+           //us.removeMembreFromProject(u2,p1);
+
+
+
+            /*Projet p1= new Projet(null, null, new ArrayList<>(), new Date(),new ArrayList<>() );
             Projet p2= new Projet(null, null, new ArrayList<>(), new Date(),new ArrayList<>() );
             pr.save(p1);pr.save(p2);
+
+
             List<Projet> projets=new ArrayList<>(); projets.add(p1);projets.add(p2);
             Utilisateur u1= new Utilisateur(null, "allam", "allam@gmail.com", projets,new ArrayList<>(),new ArrayList<>() );
             Utilisateur u2=new Utilisateur(null, "aouad", "aouad@gmail.com", new ArrayList<>(),new ArrayList<>(),new ArrayList<>() );
@@ -44,7 +75,7 @@ public class TaskFlowApplication  {
 
             Tache t1 = new Tache(null, new Date(), new Date(), "tache1", 0 , new ArrayList<>(), u2, p1, new ArrayList<>(), EtatTache.En_ATTENTE);
             Tache t2 = new Tache(null, new Date(), new Date(), "tache2", 0 , new ArrayList<>(), u3, p2, new ArrayList<>(), EtatTache.En_ATTENTE);
-            tr.save(t1);tr.save(t2);
+            tr.save(t1);tr.save(t2);*/
         };
     }
 }

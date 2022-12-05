@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Entity @Data @AllArgsConstructor @NoArgsConstructor
+@Entity @Data  @NoArgsConstructor
 public class Commentaire {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,4 +15,9 @@ public class Commentaire {
     private String contenu;
     @Temporal(TemporalType.DATE)
     private Date date;
+
+    public Commentaire(String contenu) {
+        this.contenu = contenu;
+        this.date=new Date();
+    }
 }

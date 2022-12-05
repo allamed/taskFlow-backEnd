@@ -9,9 +9,7 @@ public interface IProjetService {
     public Projet creerProjet(String nom, Utilisateur chef);
     public Projet creerProjet(String nom, Utilisateur chef , List<Utilisateur> membres);
     public void supprimerProjet(Projet projet);
-    public void ajouterMembre(Projet projet, Utilisateur membre);
-    public void virerMembre(Projet projet, Utilisateur membre);
     public List<Projet> getProjetByChef(Utilisateur chef);
-    public List<Projet> getProjetByMembre(Utilisateur membre);
+
 
 }

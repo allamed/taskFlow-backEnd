@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -11,10 +12,11 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data @NoArgsConstructor @ToString
 public class Projet {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String nom;
     @ManyToOne
     private Utilisateur chef;
     @ManyToMany (mappedBy = "projets")
@@ -23,12 +25,21 @@ public class Projet {
     @Temporal(TemporalType.DATE)
     private Date debut;
     @OneToMany(mappedBy = "projet")
-    private List<Tache> taches;
+    private List<Tache> taches=new ArrayList<>();
 
-    @PrePersist
-    private void onCreate() {
-        debut = new Date();
+
+
+    public Projet(String nom, Utilisateur chef) {
+        this.nom = nom;
+        this.chef = chef;
+        this.debut=new Date();
     }
 
+    public Projet(String nom, Utilisateur chef, List<Utilisateur> membres) {
+        this.nom = nom;
+        this.chef = chef;
+        this.membres = membres;
+        this.debut=new Date();
+    }
 
 }
