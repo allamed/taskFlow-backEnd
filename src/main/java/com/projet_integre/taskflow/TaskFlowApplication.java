@@ -32,6 +32,7 @@ public class TaskFlowApplication  {
     public static void main(String[] args) {
         SpringApplication.run(TaskFlowApplication.class, args);
     }
+
     @Bean
     CommandLineRunner start(){
 
@@ -48,7 +49,7 @@ public class TaskFlowApplication  {
             Tache t1 =ts.creerTache("tache1",new Date(),u1,p1);
             Tache t2 =ts.creerTache("tache2",new Date(),u2,p2);
             Tache t3 =ts.creerTache("tache3",new Date(),u1,p1);
-           List<Tache> taches= ts.getTachesByProjet(p1);
+           List<Tache> taches= ts.getTachesByUser(u1);
             System.out.println("********************");
            taches.forEach(x-> System.out.println(x.getTitre()));
            List <Utilisateur> users = us.getAll();

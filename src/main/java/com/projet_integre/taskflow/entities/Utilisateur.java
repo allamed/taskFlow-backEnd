@@ -23,6 +23,8 @@ public class Utilisateur {
 
     private String email;
 
+
+
     @ManyToMany
     @JsonIgnore
     private List<Projet> projets = new ArrayList<>();

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @Transactional
 public class TacheService implements ITacheService{
@@ -81,7 +83,7 @@ public class TacheService implements ITacheService{
     @Override
     public List<Tache> getTachesByUser(Utilisateur utilisateur) {
 
-        return utilisateur.getTaches();
+        return tr.findByResponsable(utilisateur);
     }
 
     @Override
@@ -98,6 +100,21 @@ public class TacheService implements ITacheService{
     @Override
     public void validerTache(Tache tache) {
         tache.setEtat(EtatTache.VALIDEE);
+        tr.save(tache);
+    }
+
+    @Override
+    public Optional<Tache> getTacheById(Integer id) {
+        return tr.findById(id);
+    }
+
+    @Override
+    public void modifierEtat(Tache tache, Integer idEtat) {
+        EtatTache newEtat= EtatTache.En_ATTENTE;
+        if (idEtat==2) newEtat=EtatTache.EN_COURS;
+        if (idEtat==3) newEtat=EtatTache.ATTENTE_VALIDATION;
+        if (idEtat==4) newEtat=EtatTache.VALIDEE;
+        tache.setEtat(newEtat);
         tr.save(tache);
     }
 }

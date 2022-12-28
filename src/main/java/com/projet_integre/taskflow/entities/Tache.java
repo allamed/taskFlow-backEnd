@@ -1,5 +1,6 @@
 package com.projet_integre.taskflow.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +25,7 @@ public class Tache {
     private Integer avancement;
     @Temporal(TemporalType.DATE)
     private List<Date> breakPoints=new ArrayList<Date>();
-    @ManyToOne
+    @ManyToOne @JsonIgnore
     private Utilisateur responsable;
     @ManyToOne
     private Projet projet;

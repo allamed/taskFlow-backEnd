@@ -1,5 +1,6 @@
 package com.projet_integre.taskflow.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,14 +18,14 @@ public class Projet {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nom;
-    @ManyToOne
+    @ManyToOne @JsonIgnore
     private Utilisateur chef;
     @ManyToMany (mappedBy = "projets")
     protected List<Utilisateur> membres=new ArrayList<>();
 
     @Temporal(TemporalType.DATE)
     private Date debut;
-    @OneToMany(mappedBy = "projet")
+    @OneToMany(mappedBy = "projet") @JsonIgnore
     private List<Tache> taches=new ArrayList<>();
 
 

@@ -6,6 +6,7 @@ import com.projet_integre.taskflow.entities.Utilisateur;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface ITacheService {
     public Tache creerTache(String titre,Date deadLine, Utilisateur responsable, Projet projet);
@@ -20,6 +21,6 @@ public interface ITacheService {
     public List <Tache> getTachesByUser(Utilisateur utilisateur);
     public void commenterTache(String commentaire, Tache tache); //la date du commentaire sera générée comme date d'aujourd'hui
     public void validerTache(Tache tache);//passe l'etat de la tache de "attente_validation à "validée"
-
-
+    public Optional<Tache> getTacheById(Integer id);
+    public void modifierEtat(Tache tache, Integer id);
 }

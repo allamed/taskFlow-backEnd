@@ -28,12 +28,19 @@ public class ProjetService implements IProjetService{
     @Override
     public Projet creerProjet(String nom, Utilisateur chef, List<Utilisateur> membres) {
         Projet projet=new Projet(nom, chef, membres);
+        chef.getProjetsDiriges().add(projet);
+        membres.forEach(x->{
+            x.integrerProjet(projet);
+            ur.save(x);
+        });
+        ur.save(chef);
         pr.save(projet);
         return projet;    }
 
     @Override
     public void supprimerProjet(Projet projet) {
         pr.delete(projet);
+        //to do limame, operation inverse pour chaque membre supprimer le projet de la liste des projets , et pour le chef supprimer le projet de la liste des projets diriges
     }
 
     @Override

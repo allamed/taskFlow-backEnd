@@ -1,7 +1,9 @@
 package com.projet_integre.taskflow.services;
 
+import com.projet_integre.taskflow.entities.LoginUser;
 import com.projet_integre.taskflow.entities.Projet;
 import com.projet_integre.taskflow.entities.Utilisateur;
+import com.projet_integre.taskflow.repositories.LoginUserRepository;
 import com.projet_integre.taskflow.repositories.ProjetRepository;
 import com.projet_integre.taskflow.repositories.UtilisateurRepository;
 import jakarta.transaction.Transactional;
@@ -18,6 +20,8 @@ public class UtilisateurService implements IUtilisateurService{
     UtilisateurRepository ur;
     @Autowired
     ProjetRepository pr;
+    @Autowired
+    LoginUserRepository lur;
 
     @Override
     public List<Utilisateur> getAll() {
@@ -28,6 +32,12 @@ public class UtilisateurService implements IUtilisateurService{
     public Utilisateur getUtilisateurById(Integer id) {
         Optional<Utilisateur> user = ur.findById(id);
         return user.get();
+
+    }
+
+    @Override
+    public Utilisateur getUtilisateurByEmail(String email) {
+        return ur.findByEmail(email);
 
     }
 
@@ -60,5 +70,15 @@ public class UtilisateurService implements IUtilisateurService{
     @Override
     public List<Projet> getProjetByMembre(Utilisateur membre) {
         return membre.getProjets();
+    }
+
+    @Override
+    public Optional<LoginUser> getLoginUserByEmail(String email) {
+        return lur.findById(email);
+    }
+
+    @Override
+    public void saveUser(Utilisateur utilisateur) {
+        ur.save(utilisateur);
     }
 }
