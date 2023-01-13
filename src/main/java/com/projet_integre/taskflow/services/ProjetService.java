@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @Transactional
 public class ProjetService implements IProjetService{
@@ -19,23 +21,13 @@ public class ProjetService implements IProjetService{
     @Override
     public Projet creerProjet(String nom, Utilisateur chef) {
         Projet projet=new Projet(nom, chef);
-        chef.getProjetsDiriges().add(projet);
-        ur.save(chef);
+        //chef.getProjetsDiriges().add(projet);
+        //ur.save(chef);
         pr.save(projet);
         return projet;
     }
 
-    @Override
-    public Projet creerProjet(String nom, Utilisateur chef, List<Utilisateur> membres) {
-        Projet projet=new Projet(nom, chef, membres);
-        chef.getProjetsDiriges().add(projet);
-        membres.forEach(x->{
-            x.integrerProjet(projet);
-            ur.save(x);
-        });
-        ur.save(chef);
-        pr.save(projet);
-        return projet;    }
+
 
     @Override
     public void supprimerProjet(Projet projet) {
@@ -49,6 +41,11 @@ public class ProjetService implements IProjetService{
 
         return pr.findProjetByChef_Id(chefId);
 
+    }
+
+    @Override
+    public Optional<Projet> getProjetById(Integer id) {
+        return pr.findById(id);
     }
 
 

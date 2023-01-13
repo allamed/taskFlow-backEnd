@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -13,20 +14,25 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data @NoArgsConstructor @ToString
+@Data @NoArgsConstructor @ToString @DynamicUpdate
 public class Projet {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nom;
-    @ManyToOne @JsonIgnore
+    @ManyToOne
     private Utilisateur chef;
-    @ManyToMany (mappedBy = "projets")
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "projet_membres",
+            joinColumns = @JoinColumn(name = "projet_id"),
+            inverseJoinColumns = @JoinColumn(name = "membre_id")
+
+    )
     protected List<Utilisateur> membres=new ArrayList<>();
 
     @Temporal(TemporalType.DATE)
     private Date debut;
-    @OneToMany(mappedBy = "projet") @JsonIgnore
-    private List<Tache> taches=new ArrayList<>();
+   // @OneToMany(mappedBy = "projet") @JsonIgnore
+    //private List<Tache> taches=new ArrayList<>();
 
 
 
@@ -36,11 +42,6 @@ public class Projet {
         this.debut=new Date();
     }
 
-    public Projet(String nom, Utilisateur chef, List<Utilisateur> membres) {
-        this.nom = nom;
-        this.chef = chef;
-        this.membres = membres;
-        this.debut=new Date();
-    }
+
 
 }

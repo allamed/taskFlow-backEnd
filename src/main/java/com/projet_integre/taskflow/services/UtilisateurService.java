@@ -29,6 +29,11 @@ public class UtilisateurService implements IUtilisateurService{
     }
 
     @Override
+    public List<Utilisateur> getMembersByProject(Projet projet) {
+        return projet.getMembres();
+    }
+
+    @Override
     public Utilisateur getUtilisateurById(Integer id) {
         Optional<Utilisateur> user = ur.findById(id);
         return user.get();
@@ -54,9 +59,11 @@ public class UtilisateurService implements IUtilisateurService{
     }
     @Override
     public void addMemberToProject( Utilisateur membre,Projet projet) {
-        membre.integrerProjet(projet);
-        ur.save(membre);
-        pr.save(projet);
+
+
+            projet.getMembres().add(membre);
+            pr.save(projet);
+
 
     }
 
@@ -67,10 +74,10 @@ public class UtilisateurService implements IUtilisateurService{
         pr.save(projet);
     }
 
-    @Override
-    public List<Projet> getProjetByMembre(Utilisateur membre) {
-        return membre.getProjets();
-    }
+    //@Override
+    //public List<Projet> getProjetByMembre(Utilisateur membre) {
+      //  return membre.getProjets();
+   // }
 
     @Override
     public Optional<LoginUser> getLoginUserByEmail(String email) {

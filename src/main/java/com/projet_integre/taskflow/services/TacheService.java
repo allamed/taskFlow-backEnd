@@ -27,11 +27,11 @@ public class TacheService implements ITacheService{
     @Override
     public Tache creerTache( String titre,Date deadLine, Utilisateur responsable, Projet projet) {
         Tache tache =new Tache(deadLine, titre, responsable, projet );
-        responsable.getTaches().add(tache);
-        projet.getTaches().add(tache);
+        //responsable.getTaches().add(tache);
+        //projet.getTaches().add(tache);
         tr.save(tache);
-        ur.save(responsable);
-        pr.save(projet);
+       // ur.save(responsable);
+       // pr.save(projet);
 
         return tache;
     }
@@ -46,9 +46,9 @@ public class TacheService implements ITacheService{
     @Override
     public void assignerTache(Tache tache, Utilisateur membre) {
         tache.setResponsable(membre);
-        membre.getTaches().add(tache);
+        //membre.getTaches().add(tache);
         tr.save(tache);
-        ur.save(membre);
+        //ur.save(membre);
     }
 
     @Override
@@ -77,7 +77,8 @@ public class TacheService implements ITacheService{
 
     @Override
     public List<Tache> getTachesByProjet(Projet projet) {
-        return projet.getTaches();
+        return tr.findTacheByProjet(projet);
+
     }
 
     @Override

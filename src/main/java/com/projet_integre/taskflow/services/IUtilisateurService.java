@@ -9,13 +9,14 @@ import java.util.Optional;
 
 public interface IUtilisateurService {
     public List<Utilisateur> getAll();
+    public List<Utilisateur> getMembersByProject(Projet projet);
     public Utilisateur getUtilisateurById(Integer id);
     public Utilisateur getUtilisateurByEmail(String email);
     public Utilisateur creerUtilisateur(String nom , String email);
     public void supprimerUtilisateur(Utilisateur utilisateur);
     public void addMemberToProject(Utilisateur membre, Projet projet);
     public void removeMembreFromProject(Utilisateur membre, Projet projet);
-    public List<Projet> getProjetByMembre (Utilisateur membre);
+    //public List<Projet> getProjetByMembre (Utilisateur membre);
     public Optional<LoginUser> getLoginUserByEmail(String email);
     public void saveUser(Utilisateur utilisateur);
 

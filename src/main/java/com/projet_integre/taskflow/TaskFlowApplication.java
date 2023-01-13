@@ -41,14 +41,22 @@ public class TaskFlowApplication  {
            Projet p1= ps.creerProjet("projet1",u1 );
             Projet p2= ps.creerProjet("projet2",u1 );
             Projet p3= ps.creerProjet("projet3",u1 );
+
            Utilisateur u2= us.creerUtilisateur("aouad","aouad@gmail.com");
+            Utilisateur u3= us.creerUtilisateur("imami","imami@gmail.com");
            us.addMemberToProject(u2,p1);
             us.addMemberToProject(u2,p3);
+            us.addMemberToProject(u3,p3);
+            us.addMemberToProject(u3,p1);
            //List<Projet> projets= ps.getProjetByChef(u1);
           // projets.forEach(x->System.out.println(x.getNom()));
             Tache t1 =ts.creerTache("tache1",new Date(),u1,p1);
             Tache t2 =ts.creerTache("tache2",new Date(),u2,p2);
             Tache t3 =ts.creerTache("tache3",new Date(),u1,p1);
+            ts.majAvancement(t1,25);
+            ts.majAvancement(t2,37);
+            ts.majAvancement(t3,75);
+
            List<Tache> taches= ts.getTachesByUser(u1);
             System.out.println("********************");
            taches.forEach(x-> System.out.println(x.getTitre()));

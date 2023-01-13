@@ -25,7 +25,7 @@ public class Tache {
     private Integer avancement;
     @Temporal(TemporalType.DATE)
     private List<Date> breakPoints=new ArrayList<Date>();
-    @ManyToOne @JsonIgnore
+    @ManyToOne
     private Utilisateur responsable;
     @ManyToOne
     private Projet projet;
