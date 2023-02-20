@@ -22,6 +22,7 @@ public class Tache {
     private Date deadLine;
 
     private String titre;
+    private String description;
     private Integer avancement;
     @Temporal(TemporalType.DATE)
     private List<Date> breakPoints=new ArrayList<Date>();

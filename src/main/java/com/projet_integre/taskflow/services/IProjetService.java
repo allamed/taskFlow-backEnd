@@ -12,6 +12,7 @@ public interface IProjetService {
 
     public void supprimerProjet(Projet projet);
     public List<Projet> getProjetByChef(Utilisateur chef);
+    public List<Projet> getProjetByMember(Integer memberId);
     public Optional<Projet> getProjetById(Integer id);
 
 

@@ -21,8 +21,7 @@ public class ProjetService implements IProjetService{
     @Override
     public Projet creerProjet(String nom, Utilisateur chef) {
         Projet projet=new Projet(nom, chef);
-        //chef.getProjetsDiriges().add(projet);
-        //ur.save(chef);
+
         pr.save(projet);
         return projet;
     }
@@ -41,6 +40,11 @@ public class ProjetService implements IProjetService{
 
         return pr.findProjetByChef_Id(chefId);
 
+    }
+
+    @Override
+    public List<Projet> getProjetByMember(Integer memberId) {
+        return pr.findProjetByMemberId(memberId);
     }
 
     @Override

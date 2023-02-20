@@ -1,5 +1,6 @@
 package com.projet_integre.taskflow.services;
 
+import com.projet_integre.taskflow.entities.Commentaire;
 import com.projet_integre.taskflow.entities.Projet;
 import com.projet_integre.taskflow.entities.Tache;
 import com.projet_integre.taskflow.entities.Utilisateur;
@@ -19,8 +20,12 @@ public interface ITacheService {
     public void majBreakPoints(Tache tache, List<Date> breakPoints);
     public List<Tache> getTachesByProjet(Projet projet);
     public List <Tache> getTachesByUser(Utilisateur utilisateur);
-    public void commenterTache(String commentaire, Tache tache); //la date du commentaire sera générée comme date d'aujourd'hui
+    public void commenterTache(Commentaire commentaire, Tache tache); //la date du commentaire sera générée comme date d'aujourd'hui
     public void validerTache(Tache tache);//passe l'etat de la tache de "attente_validation à "validée"
     public Optional<Tache> getTacheById(Integer id);
     public void modifierEtat(Tache tache, Integer id);
+    public void modifierTitre(Tache tache, String nouveauTitre);
+
+    public void modifierDescription(Tache tache, String newDesc);
+    public Commentaire creerCommentaire(String contenu, Utilisateur auteur );
 }

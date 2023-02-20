@@ -14,17 +14,18 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data @NoArgsConstructor @ToString @DynamicUpdate
+@Data @NoArgsConstructor @ToString
 public class Projet {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nom;
     @ManyToOne
     private Utilisateur chef;
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "projet_membres",
-            joinColumns = @JoinColumn(name = "projet_id"),
-            inverseJoinColumns = @JoinColumn(name = "membre_id")
+    @ManyToMany
+    @JoinTable(name = "projet_membres"
+            //, joinColumns = @JoinColumn(name = "projet_id"),
+           // inverseJoinColumns = @JoinColumn(name = "membre_id")
+
 
     )
     protected List<Utilisateur> membres=new ArrayList<>();

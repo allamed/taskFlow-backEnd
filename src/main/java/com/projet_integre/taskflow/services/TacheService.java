@@ -51,6 +51,7 @@ public class TacheService implements ITacheService{
         //ur.save(membre);
     }
 
+
     @Override
     public void supprimerTache(Tache tache) {
         tr.delete(tache);
@@ -88,10 +89,10 @@ public class TacheService implements ITacheService{
     }
 
     @Override
-    public void commenterTache(String commentaire, Tache tache) {
-        Commentaire com=new Commentaire(commentaire );
-        tache.getCommentaires().add(com);
-        cr.save(com);
+    public void commenterTache(Commentaire commentaire, Tache tache) {
+
+        tache.getCommentaires().add(commentaire);
+
         tr.save(tache);
 
 
@@ -117,5 +118,27 @@ public class TacheService implements ITacheService{
         if (idEtat==4) newEtat=EtatTache.VALIDEE;
         tache.setEtat(newEtat);
         tr.save(tache);
+    }
+
+    @Override
+    public void modifierTitre(Tache tache, String nouveauTitre) {
+        tache.setTitre(nouveauTitre);
+        tr.save(tache);
+    }
+
+    @Override
+    public void modifierDescription(Tache tache, String newDesc) {
+        //System.out.println("avant "+tache.getTitre());
+        tache.setDescription(newDesc);
+        //System.out.println("milieu"+tache.getTitre());
+        tr.save(tache);
+        //System.out.println("apres "+tache.getTitre());
+    }
+
+    @Override
+    public Commentaire creerCommentaire(String contenu, Utilisateur auteur) {
+        Commentaire commentaire=new Commentaire(contenu,auteur);
+        cr.save(commentaire);
+        return commentaire;
     }
 }
