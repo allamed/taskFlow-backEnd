@@ -1,0 +1,33 @@
+2023-02-20 21:22:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "UTILISATEUR" not found (this database is empty); SQL statement:
+select u1_0.id,u1_0.email,u1_0.nom from utilisateur u1_0 where u1_0.email=? [42104-214]
+2023-02-20 21:22:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "UTILISATEUR" not found (this database is empty); SQL statement:
+select u1_0.id,u1_0.email,u1_0.nom from utilisateur u1_0 where u1_0.email=? [42104-214]
+2023-02-20 21:22:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "UTILISATEUR" not found (this database is empty); SQL statement:
+select u1_0.id,u1_0.email,u1_0.nom from utilisateur u1_0 where u1_0.email=? [42104-214]
+2023-02-20 21:22:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "UTILISATEUR" not found (this database is empty); SQL statement:
+select u1_0.id,u1_0.email,u1_0.nom from utilisateur u1_0 where u1_0.email=? [42104-214]
+2023-02-20 21:22:43 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "UTILISATEUR" not found (this database is empty); SQL statement:
+select u1_0.id,u1_0.email,u1_0.nom from utilisateur u1_0 where u1_0.email=? [42104-214]
+2023-02-20 21:22:43 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PROJET" not found (this database is empty); SQL statement:
+select p1_0.id,p1_0.chef_id,p1_0.debut,p1_0.nom from projet p1_0 join projet_membres m1_0 on p1_0.id=m1_0.projet_id where m1_0.membres_id=? [42104-214]
+2023-02-20 21:22:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "UTILISATEUR" not found (this database is empty); SQL statement:
+select u1_0.id,u1_0.email,u1_0.nom from utilisateur u1_0 where u1_0.id=? [42104-214]
+2023-02-20 21:22:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "UTILISATEUR" not found (this database is empty); SQL statement:
+select u1_0.id,u1_0.email,u1_0.nom from utilisateur u1_0 where u1_0.email=? [42104-214]
+2023-02-20 21:22:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "UTILISATEUR" not found (this database is empty); SQL statement:
+select u1_0.id,u1_0.email,u1_0.nom from utilisateur u1_0 where u1_0.email=? [42104-214]
+2023-02-20 21:24:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "UTILISATEUR" not found (this database is empty); SQL statement:
+select u1_0.id,u1_0.email,u1_0.nom from utilisateur u1_0 where u1_0.email=? [42104-214]
+2023-02-20 21:27:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "UTILISATEUR" not found (this database is empty); SQL statement:
+insert into utilisateur (id, email, nom) values (default, ?, ?) [42104-214]

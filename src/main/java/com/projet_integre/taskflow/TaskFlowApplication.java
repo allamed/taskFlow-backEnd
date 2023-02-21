@@ -40,7 +40,7 @@ public class TaskFlowApplication  {
     CommandLineRunner start(){
 
         return args -> {
-           /*Utilisateur u1= us.creerUtilisateur("allam","allam@gmail.com");
+           Utilisateur u1= us.creerUtilisateur("allam","allam@gmail.com");
            Projet p1= ps.creerProjet("inventaire total    du magasin",u1 );
             Projet p2= ps.creerProjet("réalisation de la documentation de maintenance des machines numériques",u1 );
             Projet p3= ps.creerProjet("rédaction d'un cahier de charge pour un marché d'acquisition de véhicules de transport",u1 );
@@ -75,7 +75,7 @@ public class TaskFlowApplication  {
             System.out.println("********************");
            taches.forEach(x-> System.out.println(x.getTitre()));
            List <Utilisateur> users = us.getAll();
-           users.forEach(x-> System.out.println(x.getNom()));*/
+           users.forEach(x-> System.out.println(x.getNom()));
 
            //ImageData image= idr.findById(Long.valueOf(1)).get();
            //image.setUtilisateur(u1);
