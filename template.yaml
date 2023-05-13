@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Timeout: 30
+
+
+Parameters:
+  SecurityGroupId:
+    Description: Security Group for the application
+    Type: String
+  Subnet1Id:
+    Description: Subnet Id for the first subnet
+    Type: String
+  Subnet2Id:
+    Description: Subnet Id for the second subnet
+    Type: String
+  DatabaseSecretName:
+    Description: The name of the secret holding database credentials
+    Type: String
+  DatabaseEndpoint:
+    Description: The endpoint of the database
+    Type: String
+
+Resources:
+  ProductApiFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: .
+      Handler: com.projet_integre.taskflow.StreamLambdaHandler::handleRequest
+      Runtime: java17
+      VpcConfig:
+        SecurityGroupIds:
+          - sg-05dd86dd0ce9c9a53
+        SubnetIds:
+          - subnet-013638de20077758e
+          - subnet-0a16b48ac3490c0d9
+      Architectures:
+        - x86_64
+      MemorySize: 2048
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1 # More info about tiered compilation https://aws.amazon.com/blogs/compute/optimizing-aws-lambda-function-performance-for-java/
+      Policies:
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: !Sub arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:${DatabaseSecretName}
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY

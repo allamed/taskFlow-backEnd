@@ -1,0 +1,11 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "tasker"
+resolve_s3 = true
+s3_prefix = "tasker"
+region = "us-west-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = []
+parameter_overrides = "SecurityGroupId=\"sg-05dd86dd0ce9c9a53\" Subnet1Id=\"subnet-013638de20077758e\" Subnet2Id=\"subnet-0a16b48ac3490c0d9\" DatabaseSecretName=\"\" DatabaseEndpoint=\"\""
